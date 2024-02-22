@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'tasks.dart';
+import '../componentes/tasks.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -37,6 +37,7 @@ class _HomeState extends State<Home> {
             Tasks('Meditar', 'images/3.jpg', 5),
             Tasks('Ler', 'images/4.jpeg', 4),
             Tasks('Jogar', 'images/5.jpg', 1),
+            SizedBox(height: 80,)
           ],
         ),
       ),
