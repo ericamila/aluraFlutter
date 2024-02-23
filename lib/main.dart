@@ -1,3 +1,5 @@
+import 'package:alura_flutter_app_tarefas/componentes/theme.dart';
+import 'package:alura_flutter_app_tarefas/pages/form_screen.dart';
 import 'package:flutter/material.dart';
 import 'pages/home_page.dart';
 
@@ -12,11 +14,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Atividades',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
-        useMaterial3: true,
-      ),
-      home: const Home(),
+      theme: tema,
+      //home: const Home(),
+      home: const FormScreen(),
     );
   }
 }
