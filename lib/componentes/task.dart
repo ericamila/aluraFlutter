@@ -9,32 +9,41 @@ const List<Color> mcores = [
   Colors.yellow
 ];
 
-class Tasks extends StatefulWidget {
+class Task extends StatefulWidget {
   final String nome;
   final String foto;
   final int dificuldade;
 
-  const Tasks(this.nome, this.foto, this.dificuldade, {super.key});
+  Task(this.nome, this.foto, this.dificuldade, {super.key});
+
+  int nivel = 0;
 
   @override
-  State<Tasks> createState() => _TasksState();
+  State<Task> createState() => _TaskState();
 }
 
-class _TasksState extends State<Tasks> {
-  int nivel = 0;
+class _TaskState extends State<Task> {
+
   int cont = 0;
 
+  bool assetOrNetwork() {
+    if (widget.foto.contains('http')) {
+      return false;
+    }
+    return true;
+  }
+
   Color mudaCores() {
-    if (((nivel / widget.dificuldade) == widget.dificuldade * 10) &&
-        cont < mcores.length-1) {
+    if (((widget.nivel / widget.dificuldade) == widget.dificuldade * 10) &&
+        cont < mcores.length - 1) {
       setState(() {
         cont++;
-        nivel = 0;
+        widget.nivel = 0;
       });
       if (cont >= mcores.length) {
         setState(() {
           cont = 0;
-          nivel = 0;
+          widget.nivel = 0;
         });
       }
       return mcores[cont];
@@ -42,8 +51,7 @@ class _TasksState extends State<Tasks> {
       setState(() {
         cont = 0;
       });
-    }else {
-    }
+    } else {}
     return mcores[cont];
   }
 
@@ -83,8 +91,9 @@ class _TasksState extends State<Tasks> {
                       ),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(4),
-                        child: Image.asset(widget.foto, fit: BoxFit.cover),
-                        //child: Image.network(widget.foto, fit: BoxFit.cover),
+                        child: assetOrNetwork()
+                            ? Image.asset(widget.foto, fit: BoxFit.cover)
+                            : Image.network(widget.foto, fit: BoxFit.cover),
                       ),
                     ),
                     Column(
@@ -111,7 +120,7 @@ class _TasksState extends State<Tasks> {
                         child: ElevatedButton(
                           onPressed: () {
                             setState(() {
-                              nivel++;
+                              widget.nivel++;
                             });
                           },
                           style: ElevatedButton.styleFrom(
@@ -151,7 +160,7 @@ class _TasksState extends State<Tasks> {
                       child: LinearProgressIndicator(
                         color: Colors.white,
                         value: (widget.dificuldade > 0)
-                            ? (nivel / widget.dificuldade) / 10
+                            ? (widget.nivel / widget.dificuldade) / 10
                             : 1,
                       ),
                     ),
@@ -159,7 +168,7 @@ class _TasksState extends State<Tasks> {
                   Padding(
                     padding: const EdgeInsets.all(12.0),
                     child: Text(
-                      'Nivel: $nivel',
+                      'Nivel: ${widget.nivel}',
                       style: const TextStyle(color: Colors.white, fontSize: 16),
                     ),
                   ),

@@ -1,6 +1,6 @@
+import 'package:alura_flutter_app_tarefas/data/task_inherited.dart';
+import 'package:alura_flutter_app_tarefas/pages/form_screen.dart';
 import 'package:flutter/material.dart';
-
-import '../componentes/tasks.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -11,7 +11,6 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
 
-  bool opacidade = true;
 
   @override
   Widget build(BuildContext context) {
@@ -24,32 +23,23 @@ class _HomeState extends State<Home> {
         backgroundColor: Colors.blue,
         leading: Container(),
       ),
-      body: AnimatedOpacity(
-        opacity: (opacidade) ? 1:0,
-        duration: const Duration(milliseconds: 1000),
-        child: ListView(
-          children: const [
-            Padding(
-              padding: EdgeInsets.only(top: 8),
-              child: Tasks('Aprender Flutter', 'images/1.png', 3),
-            ),
-            Tasks('Andar de Bike', 'images/2.jpeg', 2),
-            Tasks('Meditar', 'images/3.jpg', 5),
-            Tasks('Ler', 'images/4.jpeg', 4),
-            Tasks('Jogar', 'images/5.jpg', 1),
-            SizedBox(height: 80,)
-          ],
-        ),
+      body: ListView(
+        children: TaskInherited.of(context).taskList,
+        padding: const EdgeInsets.only(top: 8, bottom: 70),
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.blue,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50),),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(50),
+        ),
         onPressed: () {
-          setState(() {
-            opacidade = !opacidade;
-          });
+          Navigator.push(context,
+              MaterialPageRoute(builder: (contextNew) => FormScreen(taskContext: context,)));
         },
-        child: const Icon(Icons.remove_red_eye, color: Colors.white,),
+        child: const Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
       ),
     );
   }

@@ -1,5 +1,5 @@
 import 'package:alura_flutter_app_tarefas/componentes/theme.dart';
-import 'package:alura_flutter_app_tarefas/pages/form_screen.dart';
+import 'package:alura_flutter_app_tarefas/data/task_inherited.dart';
 import 'package:flutter/material.dart';
 import 'pages/home_page.dart';
 
@@ -15,8 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Atividades',
       theme: tema,
-      //home: const Home(),
-      home: const FormScreen(),
+      home: TaskInherited(child: const Home()),
     );
   }
 }
