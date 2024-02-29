@@ -24,8 +24,8 @@ class _HomeState extends State<Home> {
         leading: Container(),
       ),
       body: ListView(
-        children: TaskInherited.of(context).taskList,
         padding: const EdgeInsets.only(top: 8, bottom: 70),
+        children: TaskInherited.of(context).taskList,
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.blue,

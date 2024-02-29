@@ -7,13 +7,7 @@ class TaskInherited extends InheritedWidget {
     required Widget child,
   }) : super(child: child);
 
-  final List<Task> taskList = [
-    Task('Aprender Flutter', 'images/1.png', 3),
-    Task('Andar de Bike', 'images/2.jpeg', 2),
-    Task('Meditar', 'images/3.jpg', 5),
-    Task('Ler', 'images/4.jpeg', 4),
-    Task('Jogar', 'images/5.jpg', 1),
-  ];
+  final List<Task> taskList = [];
 
   void newTask(String name, String photo, int difficult){
     taskList.add(Task(name, photo, difficult));
