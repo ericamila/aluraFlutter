@@ -1,3 +1,4 @@
+import 'package:alura_flutter_app_tarefas/data/task_dao.dart';
 import 'package:flutter/material.dart';
 import 'difficulty.dart';
 
@@ -24,9 +25,6 @@ class Task extends StatefulWidget {
 }
 
 class _TaskState extends State<Task> {
-
-  int cont = 0;
-
   bool assetOrNetwork() {
     if (widget.foto.contains('http')) {
       return false;
@@ -35,25 +33,25 @@ class _TaskState extends State<Task> {
   }
 
   Color mudaCores() {
-    if (((widget.nivel / widget.dificuldade) == widget.dificuldade * 10) &&
-        cont < mcores.length - 1) {
+    var limite = widget.dificuldade * 10;
+    if (widget.nivel <= limite) {
+      if (widget.nivel <= 10){
+        return mcores[0];
+      } else if (widget.nivel <= 20) {
+        return mcores[1];
+      } else if (widget.nivel <= 30){
+        return mcores[2];
+      } else if (widget.nivel <= 40) {
+        return mcores[3];
+      } else if (widget.nivel <= 50) {
+        return mcores[4];
+      }
+    } else {
       setState(() {
-        cont++;
         widget.nivel = 0;
       });
-      if (cont >= mcores.length) {
-        setState(() {
-          cont = 0;
-          widget.nivel = 0;
-        });
-      }
-      return mcores[cont];
-    } else if (cont >= mcores.length) {
-      setState(() {
-        cont = 0;
-      });
-    } else {}
-    return mcores[cont];
+    }
+    return mcores[0];
   }
 
   @override
@@ -119,6 +117,9 @@ class _TaskState extends State<Task> {
                         height: 52,
                         width: 62,
                         child: ElevatedButton(
+                          onLongPress: () {
+                            TaskDao().delete(widget.nome);
+                          },
                           onPressed: () {
                             setState(() {
                               widget.nivel++;

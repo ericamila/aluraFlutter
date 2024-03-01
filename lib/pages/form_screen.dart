@@ -1,4 +1,5 @@
-import 'package:alura_flutter_app_tarefas/data/task_inherited.dart';
+import 'package:alura_flutter_app_tarefas/componentes/task.dart';
+import 'package:alura_flutter_app_tarefas/data/task_dao.dart';
 import 'package:flutter/material.dart';
 
 class FormScreen extends StatefulWidget {
@@ -134,11 +135,11 @@ class _FormScreenState extends State<FormScreen> {
                       )),
                   ElevatedButton(
                     onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        TaskInherited.of(widget.taskContext).newTask(
+                      if (_formKey.currentState!.validate()) {//começa aqui
+                        TaskDao().save(Task(
                             nameController.text,
                             imageController.text,
-                            int.parse(difficultController.text));
+                            int.parse(difficultController.text)));
 
                         ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
