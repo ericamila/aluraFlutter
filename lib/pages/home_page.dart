@@ -15,7 +15,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Tarefas', style: TextStyle(color: Colors.white)),
+        title: const Text('Tarefas'),
         backgroundColor: Colors.blue,
         leading: const Icon(Icons.task_alt),
         actions: [
@@ -35,35 +35,11 @@ class _HomeState extends State<Home> {
               List<Task>? items = snapshot.data;
               switch (snapshot.connectionState) {
                 case ConnectionState.none:
-                  return const Center(
-                    child: Column(
-                      children: [
-                        CircularProgressIndicator(),
-                        Text('Carregando')
-                      ],
-                    ),
-                  );
-                  break;
+                  return exibeCarregando();
                 case ConnectionState.waiting:
-                  return const Center(
-                    child: Column(
-                      children: [
-                        CircularProgressIndicator(),
-                        Text('Carregando')
-                      ],
-                    ),
-                  );
-                  break;
+                  return exibeCarregando();
                 case ConnectionState.active:
-                  return const Center(
-                    child: Column(
-                      children: [
-                        CircularProgressIndicator(),
-                        Text('Carregando')
-                      ],
-                    ),
-                  );
-                  break;
+                  return exibeCarregando();
                 case ConnectionState.done:
                   if (snapshot.hasData && items != null) {
                     if (items.isNotEmpty) {
@@ -91,23 +67,27 @@ class _HomeState extends State<Home> {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.blue,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(50),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
         onPressed: () {
           Navigator.push(
               context,
               MaterialPageRoute(
                   builder: (contextNew) => FormScreen(
                         taskContext: context,
-                      ))).then((value) => setState(() {
-                print('Recarregando a tela inicial');
-              }));
+                      ))).then((value) => setState(() {}));
         },
         child: const Icon(
           Icons.add,
           color: Colors.white,
         ),
+      ),
+    );
+  }
+
+  Center exibeCarregando() {
+    return const Center(
+      child: Column(
+        children: [CircularProgressIndicator(), Text('Carregando')],
       ),
     );
   }
