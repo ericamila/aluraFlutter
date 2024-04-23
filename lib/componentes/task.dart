@@ -63,10 +63,7 @@ class _TaskState extends State<Task> {
         children: [
           Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(4),
-              color: mudaCores(),
-              //color: Colors.blue,
-            ),
+                borderRadius: BorderRadius.circular(4), color: mudaCores()),
             height: 140,
           ),
           Column(
@@ -74,9 +71,8 @@ class _TaskState extends State<Task> {
             children: [
               Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(4),
-                  color: Colors.white,
-                ),
+                    borderRadius: BorderRadius.circular(4),
+                    color: Colors.white),
                 height: 100,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -146,11 +142,9 @@ class _TaskState extends State<Task> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(
-                      left: 8,
-                    ),
+                    padding: const EdgeInsets.only(left: 8),
                     child: SizedBox(
-                      width: 200,
+                      width: deviceInfo.size.width * 0.6,
                       child: LinearProgressIndicator(
                         color: Colors.white,
                         value: (widget.dificuldade > 0)

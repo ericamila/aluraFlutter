@@ -42,6 +42,7 @@ class _FormScreenState extends State<FormScreen> {
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Nova Tarefa'),
+          leading: const Icon(Icons.add_task),
         ),
         body: Center(
           child: SingleChildScrollView(

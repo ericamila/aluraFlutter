@@ -15,18 +15,15 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Tarefas',
-          style: TextStyle(color: Colors.white),
-        ),
+        title: const Text('Tarefas', style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.blue,
-        leading: Container(),
+        leading: const Icon(Icons.task_alt),
         actions: [
           IconButton(
               onPressed: () {
                 setState(() {});
               },
-              icon: Icon(Icons.refresh))
+              icon: const Icon(Icons.refresh))
         ],
       ),
       body: Padding(
@@ -79,23 +76,17 @@ class _HomeState extends State<Home> {
                     }
                     return const Center(
                       child: Column(
+                        mainAxisSize: MainAxisSize.min,
                         children: [
-                          Icon(
-                            Icons.error_outline,
-                            size: 128,
-                          ),
-                          Text(
-                            'Não há nenhuma tarefa!',
-                            style: TextStyle(fontSize: 32),
-                          ),
+                          Icon(Icons.error_outline, size: 72),
+                          Text('Não existem tarefas!',
+                              style: TextStyle(fontSize: 20)),
                         ],
                       ),
                     );
                   }
                   return const Text('Erro ao carregar tarefas!');
-                  break;
               }
-              return const Text('Erro desconhecido!');
             }),
       ),
       floatingActionButton: FloatingActionButton(
