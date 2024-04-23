@@ -35,11 +35,11 @@ class _TaskState extends State<Task> {
   Color mudaCores() {
     var limite = widget.dificuldade * 10;
     if (widget.nivel <= limite) {
-      if (widget.nivel <= 10){
+      if (widget.nivel <= 10) {
         return mcores[0];
       } else if (widget.nivel <= 20) {
         return mcores[1];
-      } else if (widget.nivel <= 30){
+      } else if (widget.nivel <= 30) {
         return mcores[2];
       } else if (widget.nivel <= 40) {
         return mcores[3];
@@ -56,6 +56,7 @@ class _TaskState extends State<Task> {
 
   @override
   Widget build(BuildContext context) {
+    MediaQueryData deviceInfo = MediaQuery.of(context);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Stack(
@@ -82,7 +83,7 @@ class _TaskState extends State<Task> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
-                      width: 72,
+                      width: deviceInfo.size.width * 0.2,
                       height: 100,
                       decoration: BoxDecoration(
                         color: Colors.black26,
@@ -100,7 +101,7 @@ class _TaskState extends State<Task> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(
-                          width: 190,
+                          width: deviceInfo.size.width * 0.49,
                           child: Text(
                             widget.nome,
                             style: const TextStyle(
@@ -111,11 +112,9 @@ class _TaskState extends State<Task> {
                       ],
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 16, horizontal: 8),
+                      padding: const EdgeInsets.only(right: 8),
                       child: SizedBox(
-                        height: 52,
-                        width: 62,
+                        height: 64,
                         child: ElevatedButton(
                           onLongPress: () {
                             TaskDao().delete(widget.nome);
@@ -126,22 +125,15 @@ class _TaskState extends State<Task> {
                             });
                           },
                           style: ElevatedButton.styleFrom(
+                              shape: const CircleBorder(),
                               backgroundColor: Colors.blue,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(5))),
+                              foregroundColor: Colors.white),
                           child: const Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Icon(
-                                Icons.arrow_drop_up,
-                                color: Colors.white,
-                              ),
-                              Text(
-                                'UP',
-                                style: TextStyle(
-                                    fontSize: 10, color: Colors.white),
-                              ),
+                              Icon(Icons.arrow_drop_up),
+                              Text('UP', style: TextStyle(fontSize: 10)),
                             ],
                           ),
                         ),
